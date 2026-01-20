@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Active Meditation Session</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,100..900;1,100..900&amp;family=Noto+Sans:ital,wght@0,100..900;1,100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#8a998a",
+              "background-light": "#f0f0e0",
+              "background-dark": "#182018",
+              "neutral-dark": "#141514",
+              "neutral-light": "#f5f5f5",
+            },
+            fontFamily: {
+              "display": ["Noto Serif", "serif"],
+              "sans": ["Noto Sans", "sans-serif"],
+            },
+            borderRadius: {
+              "DEFAULT": "0.5rem",
+              "lg": "1rem",
+              "xl": "1.5rem",
+              "full": "9999px"
+            },
+            keyframes: {
+                breathe: {
+                    '0%, 100%': { transform: 'scale(1)', opacity: '1' },
+                    '50%': { transform: 'scale(1.05)', opacity: '0.85' },
+                }
+            },
+            animation: {
+                breathe: 'breathe 8s ease-in-out infinite',
+            }
+          },
+        },
+      }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark min-h-screen text-neutral-dark dark:text-neutral-light font-display antialiased overflow-hidden selection:bg-primary/30">
+<div class="relative flex h-full min-h-screen w-full flex-col justify-between">
+<!-- TopAppBar (Modified for minimalism) -->
+<header class="flex items-center p-6 justify-between z-10">
+<div class="flex items-center gap-2 opacity-50 text-sm font-sans tracking-widest uppercase">
+                Focus
+            </div>
+<button aria-label="Cancel Session" class="flex items-center justify-center w-10 h-10 rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-colors cursor-pointer text-neutral-dark dark:text-neutral-light">
+<span class="material-symbols-outlined" style="font-size: 24px;">close</span>
+</button>
+</header>
+<!-- Main Content: Timer & Breathing Circle -->
+<main class="flex-grow flex flex-col items-center justify-center relative">
+<!-- Background glow for depth -->
+<div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+<div class="w-64 h-64 bg-primary/20 rounded-full blur-[80px] dark:bg-primary/10 animate-pulse"></div>
+</div>
+<!-- Central Breathing Element -->
+<div class="relative flex items-center justify-center w-72 h-72 sm:w-80 sm:h-80">
+<!-- Outer Rings representing breath/ripples -->
+<div class="absolute inset-0 rounded-full border border-primary/20 animate-breathe" style="animation-delay: 0s;"></div>
+<div class="absolute inset-4 rounded-full border border-primary/30 animate-breathe" style="animation-delay: 0.5s;"></div>
+<!-- Main Timer Circle -->
+<div class="relative w-full h-full rounded-full border-[3px] border-primary flex flex-col items-center justify-center bg-background-light/50 dark:bg-background-dark/50 backdrop-blur-sm shadow-[0_20px_50px_-12px_rgba(138,153,138,0.3)] dark:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.5)]">
+<!-- Time Display -->
+<h1 class="text-6xl sm:text-7xl font-light tracking-tight text-neutral-dark dark:text-neutral-light tabular-nums mb-1">
+                        12:45
+                    </h1>
+<!-- Guidance Text -->
+<p class="text-primary font-sans text-sm font-medium tracking-widest uppercase opacity-80 mt-2 animate-pulse">
+                        Breathe In...
+                    </p>
+</div>
+</div>
+<!-- Secondary Info (Optional stats or subtle progress) -->
+<div class="mt-12 flex items-center gap-8 opacity-40 font-sans text-xs uppercase tracking-wider">
+<div class="flex flex-col items-center gap-1">
+<span class="material-symbols-outlined text-lg">spa</span>
+<span>Zen Mode</span>
+</div>
+<div class="flex flex-col items-center gap-1">
+<span class="material-symbols-outlined text-lg">notifications_off</span>
+<span>Silent</span>
+</div>
+</div>
+</main>
+<!-- Footer: Controls -->
+<footer class="pb-12 pt-6 px-6 flex justify-center z-10">
+<!-- SingleButton (Pause) - Modified for Soft UI -->
+<button class="group relative flex items-center justify-center px-8 py-4 bg-background-light dark:bg-background-dark rounded-xl cursor-pointer transition-all active:scale-95 shadow-[-4px_-4px_10px_rgba(255,255,255,0.8),4px_4px_10px_rgba(0,0,0,0.1)] dark:shadow-[-4px_-4px_10px_rgba(255,255,255,0.05),4px_4px_10px_rgba(0,0,0,0.3)] hover:shadow-[-2px_-2px_5px_rgba(255,255,255,0.8),2px_2px_5px_rgba(0,0,0,0.1)]">
+<div class="flex items-center gap-3 text-primary group-hover:text-primary/80 transition-colors">
+<span class="material-symbols-outlined filled" style="font-variation-settings: 'FILL' 1;">pause</span>
+<span class="font-sans font-bold text-sm tracking-widest uppercase">Pause Session</span>
+</div>
+</button>
+</footer>
+</div>
+</body></html>

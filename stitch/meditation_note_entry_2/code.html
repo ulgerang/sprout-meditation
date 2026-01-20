@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Profile &amp; Cloud Sync Settings</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,100..900;1,100..900&amp;family=Manrope:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#749362",
+                        "background-light": "#f4f3f1",
+                        "background-dark": "#242428",
+                        "card-light": "#FDFCFB", // Extremely soft beige/off-white for the card
+                        "card-dark": "#2F2F35",
+                        "text-main": "#242428",
+                        "text-muted": "#8A8A8E",
+                    },
+                    fontFamily: {
+                        "display": ["Noto Serif", "serif"],
+                        "body": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem", 
+                        "lg": "1rem", 
+                        "xl": "1.5rem", 
+                        "2xl": "2rem",
+                        "full": "9999px"
+                    },
+                    boxShadow: {
+                        "soft": "0 20px 40px -10px rgba(0, 0, 0, 0.1)",
+                        "glow": "0 0 20px -5px rgba(116, 147, 98, 0.3)"
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+    body {max-width: 480px;
+        margin: 0 auto;
+        min-height: 100vh;
+        border-left: 1px solid rgba(0,0,0,0.05);
+        border-right: 1px solid rgba(0,0,0,0.05);
+    }.no-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+    .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+</style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-body antialiased text-text-main dark:text-stone-100 flex flex-col h-screen relative overflow-hidden">
+<header class="px-6 pt-12 pb-4 flex items-center justify-between z-10 bg-background-light/90 dark:bg-background-dark/90 backdrop-blur-sm sticky top-0">
+<button class="w-10 h-10 -ml-2 rounded-full flex items-center justify-center hover:bg-stone-200 dark:hover:bg-stone-800 transition-colors text-text-main dark:text-stone-300">
+<span class="material-symbols-outlined text-2xl">arrow_back</span>
+</button>
+<h1 class="font-display text-xl font-medium tracking-tight text-text-main dark:text-stone-100">Profile &amp; Sync</h1>
+<div class="w-8"></div> 
+</header>
+<main class="flex-1 overflow-y-auto no-scrollbar px-6 pb-12 space-y-8">
+<section>
+<div class="bg-card-light dark:bg-card-dark rounded-2xl p-5 shadow-soft flex items-center gap-4 border border-stone-100 dark:border-stone-800/60 transition-transform active:scale-[0.99] duration-200">
+<div class="relative flex-shrink-0">
+<div class="w-16 h-16 rounded-full overflow-hidden bg-stone-200 border-2 border-white dark:border-stone-600 ring-1 ring-stone-100 dark:ring-stone-700">
+<img alt="User Avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAam9Xj8sd7iIRLBC6LbCi5wtkCUgjBOTPBLEmlT7JMHZS5fqRUoGDNwz5yIKENE9b3UX9cJOf93JvkFJ0qKZSrX-_K-j4vCzNwUzRUx37w-QEF0j3kQl6anGs22x1yLtEp_Arc4IvwQQ9MW_EqgfzR0QEXLJayvfomxZSohwFiDHQXzaVj30rb4jLdhXwsTIPakl8c_pQAyTK6f6JNFatwew48X4lY9hJDt2kTLJUy4gnbTT8QvQrcJX-CnTs4IE0f9JGL9Nh4H6g"/>
+</div>
+<div class="absolute bottom-0.5 right-0.5 w-4 h-4 bg-primary border-2 border-white dark:border-card-dark rounded-full"></div>
+</div>
+<div class="flex-1 min-w-0">
+<h2 class="font-display text-lg font-semibold truncate leading-tight text-text-main dark:text-stone-100">Eleanor Pena</h2>
+<p class="text-xs text-text-muted truncate mt-1">eleanor.pena@gmail.com</p>
+</div>
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-text-muted hover:text-primary hover:bg-stone-100 dark:hover:bg-stone-800 transition-colors">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+</div>
+</section>
+<section>
+<div class="flex items-center gap-2 mb-3 px-1">
+<span class="material-symbols-outlined text-primary text-sm">cloud_circle</span>
+<h3 class="text-xs font-bold text-text-muted uppercase tracking-wider">Cloud Synchronization</h3>
+</div>
+<div class="bg-card-light dark:bg-card-dark rounded-3xl shadow-soft p-6 border border-stone-100 dark:border-stone-800/60 relative overflow-hidden">
+<div class="absolute -top-16 -right-16 w-48 h-48 bg-primary/5 rounded-full blur-3xl pointer-events-none"></div>
+<div class="flex flex-col items-center text-center relative z-10">
+<div class="w-20 h-20 rounded-2xl bg-stone-50 dark:bg-stone-800 border border-stone-100 dark:border-stone-700 flex items-center justify-center mb-4 shadow-sm text-text-main dark:text-stone-200">
+<span class="material-symbols-outlined text-5xl opacity-80" style="font-variation-settings: 'FILL' 1;">add_to_drive</span>
+</div>
+<h2 class="font-display text-2xl font-medium mb-1 text-text-main dark:text-stone-100">Google Drive</h2>
+<p class="text-sm text-text-muted">Backup your mindfulness journey.</p>
+<div class="mt-6 mb-8 inline-flex items-center gap-2 px-4 py-2 bg-stone-100 dark:bg-stone-800/80 rounded-full">
+<span class="material-symbols-outlined text-[16px] text-text-muted">sync</span>
+<span class="text-xs font-medium text-text-muted">Last sync: 14 mins ago</span>
+</div>
+<div class="w-full flex items-center justify-between p-4 rounded-xl bg-background-light dark:bg-background-dark/50 border border-stone-100 dark:border-stone-800 mb-6 transition-colors hover:border-primary/20">
+<div class="text-left">
+<p class="font-medium text-sm text-text-main dark:text-stone-200">Auto Backup</p>
+<p class="text-[10px] text-text-muted mt-0.5">Daily backup via Wi-Fi</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-stone-300 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-primary/20 rounded-full peer dark:bg-stone-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<div class="w-full space-y-3">
+<button class="group w-full h-12 bg-primary hover:bg-[#638052] text-white rounded-xl font-bold text-sm shadow-glow hover:shadow-lg hover:shadow-primary/20 flex items-center justify-center gap-2 transition-all duration-300 active:scale-[0.98]">
+<span class="material-symbols-outlined text-[20px] group-hover:-translate-y-0.5 transition-transform">cloud_upload</span>
+                            Backup Now
+                        </button>
+<button class="w-full h-12 bg-transparent border border-stone-200 dark:border-stone-700 text-text-main dark:text-stone-300 rounded-xl font-bold text-sm hover:bg-stone-50 dark:hover:bg-stone-800 flex items-center justify-center gap-2 transition-all active:scale-[0.98]">
+<span class="material-symbols-outlined text-[20px] text-text-muted">history</span>
+                            Restore Data
+                        </button>
+</div>
+</div>
+</div>
+</section>
+<div class="text-center pt-2 opacity-60">
+<span class="material-symbols-outlined text-3xl text-primary animate-pulse" style="animation-duration: 4s;">spa</span>
+<p class="text-[10px] text-text-muted mt-2 tracking-widest uppercase">Sync your peace of mind</p>
+</div>
+</main>
+
+</body></html>

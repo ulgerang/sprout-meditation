@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Meditation Statistics</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;family=Noto+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#678e7c",
+                        "background-light": "#fbfaf9",
+                        "background-dark": "#2f2d2f",
+                        "surface-light": "#ECEAE7",
+                        "surface-dark": "#3E3B3E",
+                        "text-primary-light": "#131614",
+                        "text-primary-dark": "#f0f0f0",
+                        "text-secondary-light": "#6c7a73",
+                        "text-secondary-dark": "#9aa6a0",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "2xl": "2rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom scrollbar hiding for clean look */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-text-primary-light dark:text-text-primary-dark font-display antialiased overflow-x-hidden transition-colors duration-300">
+<!-- Main Container -->
+<div class="relative flex h-full min-h-screen w-full max-w-md mx-auto flex-col pb-20">
+<!-- Top App Bar -->
+<header class="flex items-center justify-between p-6 pt-8 sticky top-0 z-10 bg-background-light/90 dark:bg-background-dark/90 backdrop-blur-sm transition-colors duration-300">
+<button class="flex size-10 items-center justify-center rounded-full hover:bg-surface-light dark:hover:bg-surface-dark transition-colors text-text-primary-light dark:text-text-primary-dark">
+<span class="material-symbols-outlined text-2xl">arrow_back</span>
+</button>
+<h1 class="text-xl font-bold tracking-tight">Statistics</h1>
+<button class="flex size-10 items-center justify-center rounded-full hover:bg-surface-light dark:hover:bg-surface-dark transition-colors text-text-primary-light dark:text-text-primary-dark">
+<span class="material-symbols-outlined text-2xl">share</span>
+</button>
+</header>
+<!-- Calendar Widget -->
+<section class="px-6 mb-8">
+<div class="bg-white dark:bg-surface-dark rounded-2xl p-5 shadow-[0_4px_20px_-4px_rgba(103,142,124,0.1)] dark:shadow-none transition-colors duration-300">
+<!-- Month Navigator -->
+<div class="flex items-center justify-between mb-6">
+<button class="p-2 hover:bg-surface-light dark:hover:bg-neutral-700 rounded-full transition-colors text-text-secondary-light dark:text-text-secondary-dark">
+<span class="material-symbols-outlined text-xl">chevron_left</span>
+</button>
+<h2 class="text-lg font-bold">September 2023</h2>
+<button class="p-2 hover:bg-surface-light dark:hover:bg-neutral-700 rounded-full transition-colors text-text-secondary-light dark:text-text-secondary-dark">
+<span class="material-symbols-outlined text-xl">chevron_right</span>
+</button>
+</div>
+<!-- Days Grid -->
+<div class="grid grid-cols-7 gap-y-2 text-center mb-2">
+<div class="text-xs font-bold text-text-secondary-light dark:text-text-secondary-dark uppercase tracking-wider">S</div>
+<div class="text-xs font-bold text-text-secondary-light dark:text-text-secondary-dark uppercase tracking-wider">M</div>
+<div class="text-xs font-bold text-text-secondary-light dark:text-text-secondary-dark uppercase tracking-wider">T</div>
+<div class="text-xs font-bold text-text-secondary-light dark:text-text-secondary-dark uppercase tracking-wider">W</div>
+<div class="text-xs font-bold text-text-secondary-light dark:text-text-secondary-dark uppercase tracking-wider">T</div>
+<div class="text-xs font-bold text-text-secondary-light dark:text-text-secondary-dark uppercase tracking-wider">F</div>
+<div class="text-xs font-bold text-text-secondary-light dark:text-text-secondary-dark uppercase tracking-wider">S</div>
+</div>
+<div class="grid grid-cols-7 gap-y-1 justify-items-center">
+<!-- Empty Days (Previous Month) -->
+<div class="size-9"></div><div class="size-9"></div><div class="size-9"></div>
+<!-- Days -->
+<button class="size-9 flex items-center justify-center rounded-full text-sm font-medium hover:bg-surface-light dark:hover:bg-neutral-700 transition-colors">1</button>
+<button class="size-9 flex items-center justify-center rounded-full text-sm font-medium hover:bg-surface-light dark:hover:bg-neutral-700 transition-colors">2</button>
+<button class="size-9 flex items-center justify-center rounded-full text-sm font-medium hover:bg-surface-light dark:hover:bg-neutral-700 transition-colors relative">
+                        3
+                        <span class="absolute bottom-1.5 size-1 rounded-full bg-primary"></span>
+</button>
+<button class="size-9 flex items-center justify-center rounded-full text-sm font-medium hover:bg-surface-light dark:hover:bg-neutral-700 transition-colors">4</button>
+<!-- Selected/Active Day -->
+<button class="size-9 flex flex-col items-center justify-center rounded-full text-sm font-bold bg-primary text-white shadow-lg shadow-primary/30">
+                        5
+                    </button>
+<button class="size-9 flex items-center justify-center rounded-full text-sm font-medium hover:bg-surface-light dark:hover:bg-neutral-700 transition-colors relative">
+                        6
+                        <span class="absolute bottom-1.5 size-1 rounded-full bg-primary"></span>
+</button>
+<button class="size-9 flex items-center justify-center rounded-full text-sm font-medium hover:bg-surface-light dark:hover:bg-neutral-700 transition-colors relative">
+                        7
+                        <span class="absolute bottom-1.5 size-1 rounded-full bg-primary"></span>
+</button>
+<button class="size-9 flex items-center justify-center rounded-full text-sm font-medium hover:bg-surface-light dark:hover:bg-neutral-700 transition-colors">8</button>
+<button class="size-9 flex items-center justify-center rounded-full text-sm font-medium hover:bg-surface-light dark:hover:bg-neutral-700 transition-colors">9</button>
+<button class="size-9 flex items-center justify-center rounded-full text-sm font-medium hover:bg-surface-light dark:hover:bg-neutral-700 transition-colors relative">
+                        10
+                        <span class="absolute bottom-1.5 size-1 rounded-full bg-primary"></span>
+</button>
+<button class="size-9 flex items-center justify-center rounded-full text-sm font-medium hover:bg-surface-light dark:hover:bg-neutral-700 transition-colors">11</button>
+<button class="size-9 flex items-center justify-center rounded-full text-sm font-medium hover:bg-surface-light dark:hover:bg-neutral-700 transition-colors relative">
+                        12
+                        <span class="absolute bottom-1.5 size-1 rounded-full bg-primary"></span>
+</button>
+<button class="size-9 flex items-center justify-center rounded-full text-sm font-medium hover:bg-surface-light dark:hover:bg-neutral-700 transition-colors">13</button>
+<button class="size-9 flex items-center justify-center rounded-full text-sm font-medium hover:bg-surface-light dark:hover:bg-neutral-700 transition-colors">14</button>
+<button class="size-9 flex items-center justify-center rounded-full text-sm font-medium hover:bg-surface-light dark:hover:bg-neutral-700 transition-colors">15</button>
+<button class="size-9 flex items-center justify-center rounded-full text-sm font-medium hover:bg-surface-light dark:hover:bg-neutral-700 transition-colors">16</button>
+<button class="size-9 flex items-center justify-center rounded-full text-sm font-medium hover:bg-surface-light dark:hover:bg-neutral-700 transition-colors">17</button>
+<button class="size-9 flex items-center justify-center rounded-full text-sm font-medium hover:bg-surface-light dark:hover:bg-neutral-700 transition-colors">18</button>
+<button class="size-9 flex items-center justify-center rounded-full text-sm font-medium hover:bg-surface-light dark:hover:bg-neutral-700 transition-colors text-text-secondary-light/50 dark:text-text-secondary-dark/50 pointer-events-none">19</button>
+<button class="size-9 flex items-center justify-center rounded-full text-sm font-medium hover:bg-surface-light dark:hover:bg-neutral-700 transition-colors text-text-secondary-light/50 dark:text-text-secondary-dark/50 pointer-events-none">20</button>
+<button class="size-9 flex items-center justify-center rounded-full text-sm font-medium hover:bg-surface-light dark:hover:bg-neutral-700 transition-colors text-text-secondary-light/50 dark:text-text-secondary-dark/50 pointer-events-none">21</button>
+<button class="size-9 flex items-center justify-center rounded-full text-sm font-medium hover:bg-surface-light dark:hover:bg-neutral-700 transition-colors text-text-secondary-light/50 dark:text-text-secondary-dark/50 pointer-events-none">22</button>
+<button class="size-9 flex items-center justify-center rounded-full text-sm font-medium hover:bg-surface-light dark:hover:bg-neutral-700 transition-colors text-text-secondary-light/50 dark:text-text-secondary-dark/50 pointer-events-none">23</button>
+<button class="size-9 flex items-center justify-center rounded-full text-sm font-medium hover:bg-surface-light dark:hover:bg-neutral-700 transition-colors text-text-secondary-light/50 dark:text-text-secondary-dark/50 pointer-events-none">24</button>
+<button class="size-9 flex items-center justify-center rounded-full text-sm font-medium hover:bg-surface-light dark:hover:bg-neutral-700 transition-colors text-text-secondary-light/50 dark:text-text-secondary-dark/50 pointer-events-none">25</button>
+<button class="size-9 flex items-center justify-center rounded-full text-sm font-medium hover:bg-surface-light dark:hover:bg-neutral-700 transition-colors text-text-secondary-light/50 dark:text-text-secondary-dark/50 pointer-events-none">26</button>
+<button class="size-9 flex items-center justify-center rounded-full text-sm font-medium hover:bg-surface-light dark:hover:bg-neutral-700 transition-colors text-text-secondary-light/50 dark:text-text-secondary-dark/50 pointer-events-none">27</button>
+<button class="size-9 flex items-center justify-center rounded-full text-sm font-medium hover:bg-surface-light dark:hover:bg-neutral-700 transition-colors text-text-secondary-light/50 dark:text-text-secondary-dark/50 pointer-events-none">28</button>
+<button class="size-9 flex items-center justify-center rounded-full text-sm font-medium hover:bg-surface-light dark:hover:bg-neutral-700 transition-colors text-text-secondary-light/50 dark:text-text-secondary-dark/50 pointer-events-none">29</button>
+<button class="size-9 flex items-center justify-center rounded-full text-sm font-medium hover:bg-surface-light dark:hover:bg-neutral-700 transition-colors text-text-secondary-light/50 dark:text-text-secondary-dark/50 pointer-events-none">30</button>
+</div>
+</div>
+</section>
+<!-- Weekly Summary Chart -->
+<section class="px-6 mb-8">
+<h3 class="text-lg font-bold text-text-primary-light dark:text-text-primary-dark mb-4">Weekly Summary</h3>
+<div class="bg-surface-light/50 dark:bg-surface-dark/30 rounded-2xl p-6 border border-white/50 dark:border-white/5 backdrop-blur-sm">
+<div class="flex items-end justify-between mb-8">
+<div>
+<p class="text-sm text-text-secondary-light dark:text-text-secondary-dark font-medium mb-1">Total Time</p>
+<p class="text-3xl font-bold tracking-tight text-text-primary-light dark:text-text-primary-dark">
+                            2h 15m
+                        </p>
+</div>
+<div class="flex flex-col items-end">
+<div class="flex items-center gap-1 bg-primary/10 dark:bg-primary/20 px-3 py-1 rounded-full">
+<span class="material-symbols-outlined text-sm text-primary">trending_up</span>
+<span class="text-sm font-bold text-primary">+12%</span>
+</div>
+</div>
+</div>
+<!-- Bar Chart -->
+<div class="flex items-end justify-between h-40 gap-3 px-2">
+<!-- Day: M -->
+<div class="group flex flex-col items-center gap-2 flex-1 h-full justify-end cursor-pointer">
+<div class="w-full relative bg-gray-200 dark:bg-gray-700 rounded-lg overflow-hidden h-full flex items-end opacity-40 group-hover:opacity-60 transition-all">
+<!-- Bar Height is dynamic -->
+<div class="w-full bg-text-secondary-light dark:bg-text-secondary-dark h-[30%]"></div>
+</div>
+<span class="text-xs font-bold text-text-secondary-light dark:text-text-secondary-dark">M</span>
+</div>
+<!-- Day: T -->
+<div class="group flex flex-col items-center gap-2 flex-1 h-full justify-end cursor-pointer">
+<div class="w-full relative bg-gray-200 dark:bg-gray-700 rounded-lg overflow-hidden h-full flex items-end group-hover:bg-gray-300 dark:group-hover:bg-gray-600 transition-all">
+<div class="w-full bg-primary h-[65%]"></div>
+</div>
+<span class="text-xs font-bold text-text-primary-light dark:text-text-primary-dark">T</span>
+</div>
+<!-- Day: W -->
+<div class="group flex flex-col items-center gap-2 flex-1 h-full justify-end cursor-pointer">
+<div class="w-full relative bg-gray-200 dark:bg-gray-700 rounded-lg overflow-hidden h-full flex items-end opacity-40 group-hover:opacity-60 transition-all">
+<div class="w-full bg-text-secondary-light dark:bg-text-secondary-dark h-[45%]"></div>
+</div>
+<span class="text-xs font-bold text-text-secondary-light dark:text-text-secondary-dark">W</span>
+</div>
+<!-- Day: T -->
+<div class="group flex flex-col items-center gap-2 flex-1 h-full justify-end cursor-pointer">
+<div class="w-full relative bg-gray-200 dark:bg-gray-700 rounded-lg overflow-hidden h-full flex items-end opacity-40 group-hover:opacity-60 transition-all">
+<div class="w-full bg-text-secondary-light dark:bg-text-secondary-dark h-[20%]"></div>
+</div>
+<span class="text-xs font-bold text-text-secondary-light dark:text-text-secondary-dark">T</span>
+</div>
+<!-- Day: F -->
+<div class="group flex flex-col items-center gap-2 flex-1 h-full justify-end cursor-pointer">
+<div class="w-full relative bg-gray-200 dark:bg-gray-700 rounded-lg overflow-hidden h-full flex items-end opacity-40 group-hover:opacity-60 transition-all">
+<div class="w-full bg-text-secondary-light dark:bg-text-secondary-dark h-[55%]"></div>
+</div>
+<span class="text-xs font-bold text-text-secondary-light dark:text-text-secondary-dark">F</span>
+</div>
+<!-- Day: S -->
+<div class="group flex flex-col items-center gap-2 flex-1 h-full justify-end cursor-pointer">
+<div class="w-full relative bg-gray-200 dark:bg-gray-700 rounded-lg overflow-hidden h-full flex items-end opacity-40 group-hover:opacity-60 transition-all">
+<div class="w-full bg-text-secondary-light dark:bg-text-secondary-dark h-[80%]"></div>
+</div>
+<span class="text-xs font-bold text-text-secondary-light dark:text-text-secondary-dark">S</span>
+</div>
+<!-- Day: S -->
+<div class="group flex flex-col items-center gap-2 flex-1 h-full justify-end cursor-pointer">
+<div class="w-full relative bg-gray-200 dark:bg-gray-700 rounded-lg overflow-hidden h-full flex items-end opacity-40 group-hover:opacity-60 transition-all">
+<div class="w-full bg-text-secondary-light dark:bg-text-secondary-dark h-[40%]"></div>
+</div>
+<span class="text-xs font-bold text-text-secondary-light dark:text-text-secondary-dark">S</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Recent Sessions List -->
+<section class="px-6 flex-1">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-lg font-bold text-text-primary-light dark:text-text-primary-dark">Recent Sessions</h3>
+<button class="text-sm font-semibold text-primary hover:text-primary/80 transition-colors">See all</button>
+</div>
+<div class="flex flex-col gap-3">
+<!-- Session Card 1 -->
+<div class="group flex items-center p-4 bg-white dark:bg-surface-dark rounded-xl shadow-sm border border-transparent hover:border-primary/20 dark:hover:border-primary/20 transition-all cursor-pointer">
+<div class="size-12 rounded-full bg-surface-light dark:bg-surface-dark/50 flex items-center justify-center text-primary shrink-0 group-hover:bg-primary group-hover:text-white transition-colors duration-300">
+<span class="material-symbols-outlined">self_improvement</span>
+</div>
+<div class="ml-4 flex-1">
+<h4 class="text-base font-bold text-text-primary-light dark:text-text-primary-dark mb-0.5">Morning Calm</h4>
+<div class="flex items-center gap-2 text-xs text-text-secondary-light dark:text-text-secondary-dark">
+<span>Today</span>
+<span class="size-1 bg-current rounded-full opacity-40"></span>
+<span>7:00 AM - 7:20 AM</span>
+</div>
+</div>
+<div class="text-sm font-bold text-text-primary-light dark:text-text-primary-dark bg-surface-light dark:bg-surface-dark/50 px-3 py-1 rounded-lg">
+                        20m
+                    </div>
+</div>
+<!-- Session Card 2 -->
+<div class="group flex items-center p-4 bg-white dark:bg-surface-dark rounded-xl shadow-sm border border-transparent hover:border-primary/20 dark:hover:border-primary/20 transition-all cursor-pointer">
+<div class="size-12 rounded-full bg-surface-light dark:bg-surface-dark/50 flex items-center justify-center text-primary shrink-0 group-hover:bg-primary group-hover:text-white transition-colors duration-300">
+<span class="material-symbols-outlined">spa</span>
+</div>
+<div class="ml-4 flex-1">
+<h4 class="text-base font-bold text-text-primary-light dark:text-text-primary-dark mb-0.5">Deep Focus</h4>
+<div class="flex items-center gap-2 text-xs text-text-secondary-light dark:text-text-secondary-dark">
+<span>Yesterday</span>
+<span class="size-1 bg-current rounded-full opacity-40"></span>
+<span>8:30 PM - 9:00 PM</span>
+</div>
+</div>
+<div class="text-sm font-bold text-text-primary-light dark:text-text-primary-dark bg-surface-light dark:bg-surface-dark/50 px-3 py-1 rounded-lg">
+                        30m
+                    </div>
+</div>
+<!-- Session Card 3 -->
+<div class="group flex items-center p-4 bg-white dark:bg-surface-dark rounded-xl shadow-sm border border-transparent hover:border-primary/20 dark:hover:border-primary/20 transition-all cursor-pointer">
+<div class="size-12 rounded-full bg-surface-light dark:bg-surface-dark/50 flex items-center justify-center text-primary shrink-0 group-hover:bg-primary group-hover:text-white transition-colors duration-300">
+<span class="material-symbols-outlined">nightlight</span>
+</div>
+<div class="ml-4 flex-1">
+<h4 class="text-base font-bold text-text-primary-light dark:text-text-primary-dark mb-0.5">Sleep Prep</h4>
+<div class="flex items-center gap-2 text-xs text-text-secondary-light dark:text-text-secondary-dark">
+<span>Sep 10</span>
+<span class="size-1 bg-current rounded-full opacity-40"></span>
+<span>10:45 PM - 11:00 PM</span>
+</div>
+</div>
+<div class="text-sm font-bold text-text-primary-light dark:text-text-primary-dark bg-surface-light dark:bg-surface-dark/50 px-3 py-1 rounded-lg">
+                        15m
+                    </div>
+</div>
+</div>
+</section>
+<!-- Bottom Tab Navigation -->
+<nav class="fixed bottom-0 left-0 w-full bg-white/90 dark:bg-background-dark/95 backdrop-blur-md border-t border-surface-light dark:border-white/5 pb-5 pt-3 px-6 z-20">
+<div class="flex justify-between items-center max-w-md mx-auto">
+<button class="flex flex-col items-center gap-1 p-2 text-text-secondary-light dark:text-text-secondary-dark hover:text-primary dark:hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-2xl">home</span>
+<span class="text-[10px] font-medium">Home</span>
+</button>
+<button class="flex flex-col items-center gap-1 p-2 text-text-secondary-light dark:text-text-secondary-dark hover:text-primary dark:hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-2xl">timer</span>
+<span class="text-[10px] font-medium">Timer</span>
+</button>
+<button class="flex flex-col items-center gap-1 p-2 text-primary">
+<span class="material-symbols-outlined text-2xl fill-1" style="font-variation-settings: 'FILL' 1;">bar_chart</span>
+<span class="text-[10px] font-bold">Stats</span>
+</button>
+<button class="flex flex-col items-center gap-1 p-2 text-text-secondary-light dark:text-text-secondary-dark hover:text-primary dark:hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-2xl">person</span>
+<span class="text-[10px] font-medium">Profile</span>
+</button>
+</div>
+</nav>
+</div>
+</body></html>

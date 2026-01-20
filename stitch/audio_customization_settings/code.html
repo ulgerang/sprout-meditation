@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Audio Customization Settings</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,100..900;1,100..900&amp;family=Manrope:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#8cba8c",
+                        "background-light": "#f1f1e9",
+                        "background-dark": "#222a22",
+                        "card-light": "#fdfdfc",
+                        "card-dark": "#2c342c",
+                    },
+                    fontFamily: {
+                        "display": ["Noto Serif", "serif"],
+                        "body": ["Manrope", "sans-serif"],
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+                    boxShadow: {
+                        'soft-glow': '0 4px 20px -2px rgba(140, 186, 140, 0.15)',
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom scrollbar hiding for clean UI */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-[#333333] dark:text-[#e0e0e0] overflow-x-hidden antialiased selection:bg-primary/30">
+<div class="relative mx-auto flex h-full min-h-screen w-full max-w-md flex-col">
+<!-- Header -->
+<header class="sticky top-0 z-10 flex items-center justify-between px-6 pt-12 pb-4 bg-background-light/90 dark:bg-background-dark/90 backdrop-blur-md transition-all duration-300">
+<button class="group flex size-10 items-center justify-center rounded-full bg-white/50 dark:bg-white/5 hover:bg-white dark:hover:bg-white/10 transition-colors">
+<span class="material-symbols-outlined text-[24px] text-zinc-800 dark:text-zinc-200 group-hover:-translate-x-0.5 transition-transform">arrow_back_ios_new</span>
+</button>
+<h1 class="text-xl font-bold tracking-tight text-center text-zinc-900 dark:text-zinc-100">Audio Settings</h1>
+<div class="size-10"></div> <!-- Spacer for optical centering -->
+</header>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col gap-8 px-6 pb-32">
+<!-- Section 1: Bell Sound -->
+<section>
+<div class="flex items-center gap-2 pb-4 pt-2">
+<span class="material-symbols-outlined text-primary text-[20px]">notifications_active</span>
+<h2 class="text-2xl font-bold text-zinc-800 dark:text-zinc-100">Bell Sound</h2>
+</div>
+<div class="flex flex-col gap-3 font-body">
+<!-- Card: Tibetan Bowl -->
+<label class="group relative flex cursor-pointer items-center justify-between rounded-xl border border-transparent bg-card-light dark:bg-card-dark p-4 shadow-sm transition-all hover:shadow-md has-[:checked]:border-primary/50 has-[:checked]:bg-white dark:has-[:checked]:bg-[#343e34] has-[:checked]:shadow-soft-glow">
+<div class="flex items-center gap-4">
+<div class="flex size-10 shrink-0 items-center justify-center rounded-full bg-[#f4f4f0] dark:bg-[#3a423a] text-zinc-600 dark:text-zinc-300 transition-colors group-has-[:checked]:bg-primary/20 group-has-[:checked]:text-primary dark:group-has-[:checked]:text-primary">
+<span class="material-symbols-outlined text-[20px]">landscape</span>
+</div>
+<div class="flex flex-col">
+<span class="text-base font-semibold leading-tight text-zinc-800 dark:text-zinc-100">Tibetan Bowl</span>
+<span class="text-xs text-zinc-500 dark:text-zinc-400">Deep resonance</span>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex size-8 items-center justify-center rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-700 text-zinc-400 hover:text-primary transition-colors z-10" onclick="event.preventDefault(); /* Logic to play preview would go here */">
+<span class="material-symbols-outlined text-[20px]">play_arrow</span>
+</div>
+<input checked="" class="h-5 w-5 border-2 border-zinc-300 text-primary focus:ring-primary focus:ring-offset-0 dark:border-zinc-600 dark:bg-zinc-800" name="bell_sound" type="radio"/>
+</div>
+</label>
+<!-- Card: Zen Gong -->
+<label class="group relative flex cursor-pointer items-center justify-between rounded-xl border border-transparent bg-card-light dark:bg-card-dark p-4 shadow-sm transition-all hover:shadow-md has-[:checked]:border-primary/50 has-[:checked]:bg-white dark:has-[:checked]:bg-[#343e34] has-[:checked]:shadow-soft-glow">
+<div class="flex items-center gap-4">
+<div class="flex size-10 shrink-0 items-center justify-center rounded-full bg-[#f4f4f0] dark:bg-[#3a423a] text-zinc-600 dark:text-zinc-300 transition-colors group-has-[:checked]:bg-primary/20 group-has-[:checked]:text-primary dark:group-has-[:checked]:text-primary">
+<span class="material-symbols-outlined text-[20px]">lens</span>
+</div>
+<div class="flex flex-col">
+<span class="text-base font-semibold leading-tight text-zinc-800 dark:text-zinc-100">Zen Gong</span>
+<span class="text-xs text-zinc-500 dark:text-zinc-400">Low frequency</span>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex size-8 items-center justify-center rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-700 text-zinc-400 hover:text-primary transition-colors z-10" onclick="event.preventDefault();">
+<span class="material-symbols-outlined text-[20px]">play_arrow</span>
+</div>
+<input class="h-5 w-5 border-2 border-zinc-300 text-primary focus:ring-primary focus:ring-offset-0 dark:border-zinc-600 dark:bg-zinc-800" name="bell_sound" type="radio"/>
+</div>
+</label>
+<!-- Card: Crystal Bell -->
+<label class="group relative flex cursor-pointer items-center justify-between rounded-xl border border-transparent bg-card-light dark:bg-card-dark p-4 shadow-sm transition-all hover:shadow-md has-[:checked]:border-primary/50 has-[:checked]:bg-white dark:has-[:checked]:bg-[#343e34] has-[:checked]:shadow-soft-glow">
+<div class="flex items-center gap-4">
+<div class="flex size-10 shrink-0 items-center justify-center rounded-full bg-[#f4f4f0] dark:bg-[#3a423a] text-zinc-600 dark:text-zinc-300 transition-colors group-has-[:checked]:bg-primary/20 group-has-[:checked]:text-primary dark:group-has-[:checked]:text-primary">
+<span class="material-symbols-outlined text-[20px] filled">diamond</span>
+</div>
+<div class="flex flex-col">
+<span class="text-base font-semibold leading-tight text-zinc-800 dark:text-zinc-100">Crystal Bell</span>
+<span class="text-xs text-zinc-500 dark:text-zinc-400">Clear &amp; sharp</span>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex size-8 items-center justify-center rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-700 text-zinc-400 hover:text-primary transition-colors z-10" onclick="event.preventDefault();">
+<span class="material-symbols-outlined text-[20px]">play_arrow</span>
+</div>
+<input class="h-5 w-5 border-2 border-zinc-300 text-primary focus:ring-primary focus:ring-offset-0 dark:border-zinc-600 dark:bg-zinc-800" name="bell_sound" type="radio"/>
+</div>
+</label>
+<!-- Card: Tingsha Cymbals -->
+<label class="group relative flex cursor-pointer items-center justify-between rounded-xl border border-transparent bg-card-light dark:bg-card-dark p-4 shadow-sm transition-all hover:shadow-md has-[:checked]:border-primary/50 has-[:checked]:bg-white dark:has-[:checked]:bg-[#343e34] has-[:checked]:shadow-soft-glow">
+<div class="flex items-center gap-4">
+<div class="flex size-10 shrink-0 items-center justify-center rounded-full bg-[#f4f4f0] dark:bg-[#3a423a] text-zinc-600 dark:text-zinc-300 transition-colors group-has-[:checked]:bg-primary/20 group-has-[:checked]:text-primary dark:group-has-[:checked]:text-primary">
+<span class="material-symbols-outlined text-[20px]">circle</span>
+</div>
+<div class="flex flex-col">
+<span class="text-base font-semibold leading-tight text-zinc-800 dark:text-zinc-100">Tingsha</span>
+<span class="text-xs text-zinc-500 dark:text-zinc-400">Awakening</span>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex size-8 items-center justify-center rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-700 text-zinc-400 hover:text-primary transition-colors z-10" onclick="event.preventDefault();">
+<span class="material-symbols-outlined text-[20px]">play_arrow</span>
+</div>
+<input class="h-5 w-5 border-2 border-zinc-300 text-primary focus:ring-primary focus:ring-offset-0 dark:border-zinc-600 dark:bg-zinc-800" name="bell_sound" type="radio"/>
+</div>
+</label>
+</div>
+</section>
+<!-- Divider -->
+<div class="h-px w-full bg-zinc-200 dark:bg-zinc-800/50"></div>
+<!-- Section 2: Ambient Background -->
+<section>
+<div class="flex items-center gap-2 pb-4 pt-2">
+<span class="material-symbols-outlined text-primary text-[20px]">graphic_eq</span>
+<h2 class="text-2xl font-bold text-zinc-800 dark:text-zinc-100">Ambient Background</h2>
+</div>
+<div class="flex flex-col gap-3 font-body">
+<!-- Card: None -->
+<label class="group relative flex cursor-pointer items-center justify-between rounded-xl border border-transparent bg-card-light dark:bg-card-dark p-4 shadow-sm transition-all hover:shadow-md has-[:checked]:border-primary/50 has-[:checked]:bg-white dark:has-[:checked]:bg-[#343e34] has-[:checked]:shadow-soft-glow">
+<div class="flex items-center gap-4">
+<div class="flex size-10 shrink-0 items-center justify-center rounded-full bg-[#f4f4f0] dark:bg-[#3a423a] text-zinc-600 dark:text-zinc-300 transition-colors group-has-[:checked]:bg-primary/20 group-has-[:checked]:text-primary dark:group-has-[:checked]:text-primary">
+<span class="material-symbols-outlined text-[20px]">block</span>
+</div>
+<div class="flex flex-col">
+<span class="text-base font-semibold leading-tight text-zinc-800 dark:text-zinc-100">Silent</span>
+<span class="text-xs text-zinc-500 dark:text-zinc-400">No background sound</span>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<input class="h-5 w-5 border-2 border-zinc-300 text-primary focus:ring-primary focus:ring-offset-0 dark:border-zinc-600 dark:bg-zinc-800" name="ambient_sound" type="radio"/>
+</div>
+</label>
+<!-- Card: Light Rain -->
+<label class="group relative flex cursor-pointer items-center justify-between rounded-xl border border-transparent bg-card-light dark:bg-card-dark p-4 shadow-sm transition-all hover:shadow-md has-[:checked]:border-primary/50 has-[:checked]:bg-white dark:has-[:checked]:bg-[#343e34] has-[:checked]:shadow-soft-glow">
+<div class="flex items-center gap-4">
+<div class="flex size-10 shrink-0 items-center justify-center rounded-full bg-[#f4f4f0] dark:bg-[#3a423a] text-zinc-600 dark:text-zinc-300 transition-colors group-has-[:checked]:bg-primary/20 group-has-[:checked]:text-primary dark:group-has-[:checked]:text-primary">
+<span class="material-symbols-outlined text-[20px]">water_drop</span>
+</div>
+<div class="flex flex-col">
+<span class="text-base font-semibold leading-tight text-zinc-800 dark:text-zinc-100">Light Rain</span>
+<span class="text-xs text-zinc-500 dark:text-zinc-400">Gentle drizzle</span>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex size-8 items-center justify-center rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-700 text-zinc-400 hover:text-primary transition-colors z-10" onclick="event.preventDefault();">
+<span class="material-symbols-outlined text-[20px]">play_arrow</span>
+</div>
+<input checked="" class="h-5 w-5 border-2 border-zinc-300 text-primary focus:ring-primary focus:ring-offset-0 dark:border-zinc-600 dark:bg-zinc-800" name="ambient_sound" type="radio"/>
+</div>
+</label>
+<!-- Card: Deep Forest -->
+<label class="group relative flex cursor-pointer items-center justify-between rounded-xl border border-transparent bg-card-light dark:bg-card-dark p-4 shadow-sm transition-all hover:shadow-md has-[:checked]:border-primary/50 has-[:checked]:bg-white dark:has-[:checked]:bg-[#343e34] has-[:checked]:shadow-soft-glow">
+<div class="flex items-center gap-4">
+<div class="flex size-10 shrink-0 items-center justify-center rounded-full bg-[#f4f4f0] dark:bg-[#3a423a] text-zinc-600 dark:text-zinc-300 transition-colors group-has-[:checked]:bg-primary/20 group-has-[:checked]:text-primary dark:group-has-[:checked]:text-primary">
+<span class="material-symbols-outlined text-[20px]">forest</span>
+</div>
+<div class="flex flex-col">
+<span class="text-base font-semibold leading-tight text-zinc-800 dark:text-zinc-100">Deep Forest</span>
+<span class="text-xs text-zinc-500 dark:text-zinc-400">Birds &amp; leaves</span>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex size-8 items-center justify-center rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-700 text-zinc-400 hover:text-primary transition-colors z-10" onclick="event.preventDefault();">
+<span class="material-symbols-outlined text-[20px]">play_arrow</span>
+</div>
+<input class="h-5 w-5 border-2 border-zinc-300 text-primary focus:ring-primary focus:ring-offset-0 dark:border-zinc-600 dark:bg-zinc-800" name="ambient_sound" type="radio"/>
+</div>
+</label>
+<!-- Card: White Noise -->
+<label class="group relative flex cursor-pointer items-center justify-between rounded-xl border border-transparent bg-card-light dark:bg-card-dark p-4 shadow-sm transition-all hover:shadow-md has-[:checked]:border-primary/50 has-[:checked]:bg-white dark:has-[:checked]:bg-[#343e34] has-[:checked]:shadow-soft-glow">
+<div class="flex items-center gap-4">
+<div class="flex size-10 shrink-0 items-center justify-center rounded-full bg-[#f4f4f0] dark:bg-[#3a423a] text-zinc-600 dark:text-zinc-300 transition-colors group-has-[:checked]:bg-primary/20 group-has-[:checked]:text-primary dark:group-has-[:checked]:text-primary">
+<span class="material-symbols-outlined text-[20px]">waves</span>
+</div>
+<div class="flex flex-col">
+<span class="text-base font-semibold leading-tight text-zinc-800 dark:text-zinc-100">White Noise</span>
+<span class="text-xs text-zinc-500 dark:text-zinc-400">Focus enhancement</span>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex size-8 items-center justify-center rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-700 text-zinc-400 hover:text-primary transition-colors z-10" onclick="event.preventDefault();">
+<span class="material-symbols-outlined text-[20px]">play_arrow</span>
+</div>
+<input class="h-5 w-5 border-2 border-zinc-300 text-primary focus:ring-primary focus:ring-offset-0 dark:border-zinc-600 dark:bg-zinc-800" name="ambient_sound" type="radio"/>
+</div>
+</label>
+</div>
+</section>
+</main>
+<!-- Sticky Footer for Upload -->
+<footer class="fixed bottom-0 left-0 right-0 z-20 flex justify-center p-6 bg-gradient-to-t from-background-light via-background-light to-transparent dark:from-background-dark dark:via-background-dark pointer-events-none">
+<button class="pointer-events-auto shadow-lg shadow-zinc-500/10 dark:shadow-black/30 flex w-full max-w-md items-center justify-center gap-3 rounded-2xl bg-zinc-800 dark:bg-zinc-200 px-6 py-4 text-white dark:text-zinc-900 transition-transform active:scale-[0.98] hover:bg-zinc-700 dark:hover:bg-zinc-100 font-body font-semibold">
+<span class="material-symbols-outlined text-[20px]">upload_file</span>
+<span>Upload Your Own (MP3)</span>
+</button>
+</footer>
+</div>
+</body></html>

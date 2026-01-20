@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Meditation Reflection</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,100..900;1,100..900&amp;family=Manrope:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#749362",
+                        "background-light": "#f4f3f1",
+                        "background-dark": "#242428",
+                        "card-light": "#FDFCFB", // Extremely soft beige/off-white for the card
+                        "card-dark": "#2F2F35",
+                        "text-main": "#242428",
+                        "text-muted": "#8A8A8E",
+                    },
+                    fontFamily: {
+                        "display": ["Noto Serif", "serif"],
+                        "body": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem", 
+                        "lg": "1rem", 
+                        "xl": "1.5rem", 
+                        "2xl": "2rem",
+                        "full": "9999px"
+                    },
+                    boxShadow: {
+                        "soft": "0 20px 40px -10px rgba(0, 0, 0, 0.1)",
+                        "glow": "0 0 20px -5px rgba(116, 147, 98, 0.3)"
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom scrollbar for textarea */
+        textarea::-webkit-scrollbar {
+            width: 6px;
+        }
+        textarea::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        textarea::-webkit-scrollbar-thumb {
+            background-color: rgba(0,0,0,0.1);
+            border-radius: 20px;
+        }
+        .mood-radio:checked + label {
+            background-color: #749362; /* Primary */
+            color: white;
+            border-color: #749362;
+        }
+        .mood-radio:checked + label .material-symbols-outlined {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Fade in animation for modal */
+        @keyframes modalPop {
+            0% { opacity: 0; transform: scale(0.95) translateY(10px); }
+            100% { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        .animate-modal {
+            animation: modalPop 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-body antialiased overflow-hidden h-screen w-full relative">
+<!-- Background Context (Blurred App State) -->
+<!-- This simulates the app behind the modal -->
+<div aria-hidden="true" class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none select-none z-0">
+<div class="w-64 h-64 rounded-full border border-stone-300 dark:border-stone-700 flex items-center justify-center mb-12 opacity-40">
+<span class="font-display text-4xl text-text-main dark:text-stone-400">20:00</span>
+</div>
+<div class="h-2 w-full max-w-xs bg-stone-200 dark:bg-stone-800 rounded-full overflow-hidden opacity-40">
+<div class="h-full bg-primary w-full"></div>
+</div>
+</div>
+<!-- Backdrop Overlay -->
+<div class="absolute inset-0 bg-stone-900/40 backdrop-blur-[2px] z-10 flex items-end sm:items-center justify-center p-4 transition-opacity">
+<!-- Modal Card -->
+<div class="animate-modal w-full max-w-[420px] bg-card-light dark:bg-card-dark rounded-2xl shadow-soft overflow-hidden flex flex-col relative sm:mb-0 mb-4">
+<!-- Decorative top detail -->
+<div class="h-1 w-full bg-gradient-to-r from-transparent via-primary/30 to-transparent opacity-50"></div>
+<!-- Header -->
+<div class="pt-8 px-6 text-center">
+<span class="material-symbols-outlined text-primary/80 mb-3 text-3xl">self_improvement</span>
+<h2 class="font-display text-3xl font-medium text-text-main dark:text-stone-100 tracking-tight">Reflection</h2>
+</div>
+<!-- Note Input Area -->
+<div class="px-6 py-4">
+<div class="relative group">
+<textarea class="w-full bg-transparent border-0 resize-none text-lg leading-relaxed text-text-main dark:text-stone-200 placeholder:text-stone-400/80 focus:ring-0 px-0 py-2 min-h-[140px]" placeholder="How was your session? Let your thoughts flow..."></textarea>
+<!-- Subtle underline that appears on focus (CSS magic mostly) -->
+<div class="absolute bottom-0 left-0 right-0 h-px bg-stone-200 dark:bg-stone-700 group-focus-within:bg-primary/50 transition-colors duration-300"></div>
+</div>
+</div>
+<!-- Mood Selector -->
+<div class="px-6 pb-2">
+<p class="text-xs font-semibold uppercase tracking-wider text-text-muted mb-4 text-center">How do you feel?</p>
+<div class="flex gap-3 justify-center">
+<!-- Option 1: Calm -->
+<div class="relative">
+<input checked="" class="mood-radio peer sr-only" id="mood_calm" name="mood" type="radio"/>
+<label class="flex flex-col items-center justify-center w-24 h-20 rounded-xl bg-background-light dark:bg-background-dark/50 border border-transparent hover:border-primary/30 cursor-pointer transition-all duration-200 select-none text-text-main dark:text-stone-300 group" for="mood_calm">
+<span class="material-symbols-outlined mb-1 text-[24px] group-hover:scale-110 transition-transform">spa</span>
+<span class="text-xs font-medium">Calm</span>
+</label>
+</div>
+<!-- Option 2: Focus -->
+<div class="relative">
+<input class="mood-radio peer sr-only" id="mood_focus" name="mood" type="radio"/>
+<label class="flex flex-col items-center justify-center w-24 h-20 rounded-xl bg-background-light dark:bg-background-dark/50 border border-transparent hover:border-primary/30 cursor-pointer transition-all duration-200 select-none text-text-main dark:text-stone-300 group" for="mood_focus">
+<span class="material-symbols-outlined mb-1 text-[24px] group-hover:scale-110 transition-transform">filter_center_focus</span>
+<span class="text-xs font-medium">Focus</span>
+</label>
+</div>
+<!-- Option 3: Restless -->
+<div class="relative">
+<input class="mood-radio peer sr-only" id="mood_restless" name="mood" type="radio"/>
+<label class="flex flex-col items-center justify-center w-24 h-20 rounded-xl bg-background-light dark:bg-background-dark/50 border border-transparent hover:border-primary/30 cursor-pointer transition-all duration-200 select-none text-text-main dark:text-stone-300 group" for="mood_restless">
+<span class="material-symbols-outlined mb-1 text-[24px] group-hover:scale-110 transition-transform">waves</span>
+<span class="text-xs font-medium">Restless</span>
+</label>
+</div>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="p-6 mt-2 flex gap-4 items-center justify-between">
+<button class="flex-1 h-12 rounded-xl text-sm font-bold text-text-muted hover:text-text-main hover:bg-stone-100 dark:hover:bg-stone-800 transition-colors">
+                    Cancel
+                </button>
+<button class="flex-[2] h-12 rounded-xl bg-primary hover:bg-[#638052] text-white text-sm font-bold shadow-glow hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-2 group">
+<span>Save Entry</span>
+<span class="material-symbols-outlined text-[18px] group-hover:translate-x-0.5 transition-transform">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</body></html>

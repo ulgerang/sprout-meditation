@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Meditation Session Complete</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,100..900;1,100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Theme Configuration -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#749362",
+                        "primary-dark": "#5e7a4e",
+                        "background-light": "#f8f2ec", 
+                        "background-dark": "#22262a",
+                        "surface-light": "#FCF9F6",
+                        "text-main": "#4F4D49",
+                        "text-muted": "#8a8d88",
+                    },
+                    fontFamily: {
+                        "display": ["Noto Serif", "serif"],
+                        "sans": ["Noto Sans", "sans-serif"], 
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "2xl": "2rem", "full": "9999px"},
+                    boxShadow: {
+                        'soft': '0 20px 60px -15px rgba(116, 147, 98, 0.15)',
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-text-main antialiased h-screen w-full overflow-hidden selection:bg-primary selection:text-white">
+<!-- Main Container -->
+<div class="relative flex h-full w-full flex-col items-center justify-center p-6 sm:p-8">
+<!-- Ambient Background Texture -->
+<!-- Adding a subtle organic texture to break the digital flatness -->
+<div class="absolute inset-0 z-0 opacity-20 dark:opacity-5 mix-blend-multiply bg-center bg-cover pointer-events-none" data-alt="Subtle japanese rice paper texture" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD_Z1Gsyn1255_C5SybR1AoHrQPqc-bLmNMTziOrvEJjOD9OdjiAWPZCTsjIkclTltQ0XEwPhuDKk5Gib_hHAPgRc3kfBOWtTf49ObYBwcmx-NVCSOTwXKH9fdDk3aLDQaUbQ5qrg4LjgMRHwO9wiHqx1NK5KSwFqORVMD7IEtGELkSyxWAZ7558jnNiic2h8qbs3eIBS7ftcKdiROd-s7G6FaRRmdReDZh1jLCGtz7LoZi5K-eH0bz4PAb8DDn99LV_37XJGpxfMg');">
+</div>
+<!-- Central Floating Card -->
+<div class="relative z-10 w-full max-w-sm bg-surface-light dark:bg-[#2a2e33] rounded-[2rem] p-8 shadow-soft border border-white/60 dark:border-white/5 flex flex-col items-center text-center animate-fade-in-up">
+<!-- Celebratory Icon -->
+<div class="mb-6 flex items-center justify-center">
+<div class="relative flex items-center justify-center w-24 h-24 rounded-full bg-primary/10">
+<span class="material-symbols-outlined text-[48px] text-primary" style="font-variation-settings: 'FILL' 1, 'wght' 400;">
+                        spa
+                    </span>
+<!-- Decorative subtle ripple ring -->
+<div class="absolute inset-0 rounded-full border border-primary/20 scale-125 opacity-50"></div>
+</div>
+</div>
+<!-- Headline -->
+<h1 class="text-[#141613] dark:text-white text-3xl font-bold leading-tight mb-3">
+                Session Complete
+            </h1>
+<!-- Quote -->
+<p class="text-text-muted text-base italic leading-relaxed mb-10 max-w-[260px]">
+                "Quiet the mind, and the soul will speak."
+            </p>
+<!-- Stats Block -->
+<div class="flex w-full items-center justify-between gap-4 mb-10 px-2">
+<!-- Total Time -->
+<div class="flex-1 flex flex-col items-center gap-1">
+<span class="text-primary text-4xl font-bold tracking-tight">15:00</span>
+<span class="text-text-muted text-xs font-medium uppercase tracking-widest">Total Time</span>
+</div>
+<!-- Vertical Divider -->
+<div class="h-10 w-px bg-primary/20 rounded-full"></div>
+<!-- Streak -->
+<div class="flex-1 flex flex-col items-center gap-1">
+<div class="flex items-center gap-1">
+<span class="text-primary text-4xl font-bold tracking-tight">5</span>
+<!-- Small flame icon next to streak number -->
+<span class="material-symbols-outlined text-primary text-xl" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+</div>
+<span class="text-text-muted text-xs font-medium uppercase tracking-widest">Day Streak</span>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="flex flex-col w-full gap-3">
+<!-- Primary Action -->
+<button class="group relative w-full h-14 bg-primary hover:bg-primary-dark active:scale-[0.98] transition-all duration-200 text-white rounded-xl font-bold text-base tracking-wide flex items-center justify-center gap-2 overflow-hidden shadow-lg shadow-primary/25">
+<div class="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 ease-in-out"></div>
+<span class="material-symbols-outlined text-[20px]">share</span>
+<span>Share Progress</span>
+</button>
+<!-- Secondary Action -->
+<button class="w-full h-14 bg-transparent hover:bg-primary/5 active:scale-[0.98] transition-all duration-200 text-primary border border-primary/30 rounded-xl font-bold text-base tracking-wide">
+                    Close
+                </button>
+</div>
+</div>
+<!-- Bottom Branding / Decorative Element -->
+<div class="mt-8 flex items-center gap-2 opacity-60">
+<div class="h-px w-8 bg-primary/40"></div>
+<span class="material-symbols-outlined text-primary/60 text-xl">self_improvement</span>
+<div class="h-px w-8 bg-primary/40"></div>
+</div>
+</div>
+</body></html>
