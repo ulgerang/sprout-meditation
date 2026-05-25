@@ -7,6 +7,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "smoke": "node scripts/browser-smoke.mjs",
+    "smoke:pwa": "node scripts/pwa-smoke.mjs",
     "preview": "vite preview",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
