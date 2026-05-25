@@ -9,7 +9,7 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'mask-icon.svg'],
+      includeAssets: ['sprout-icon.svg', 'mask-icon.svg'],
       manifest: {
         name: 'Sprout Meditation',
         short_name: 'Sprout',
@@ -17,14 +17,10 @@ export default defineConfig({
         theme_color: '#678e7c',
         icons: [
           {
-            src: 'pwa-icon-192.png',
-            sizes: '192x192',
-            type: 'image/png'
-          },
-          {
-            src: 'pwa-icon-512.png',
-            sizes: '512x512',
-            type: 'image/png'
+            src: 'sprout-icon.svg',
+            sizes: 'any',
+            type: 'image/svg+xml',
+            purpose: 'any maskable'
           }
         ]
       }

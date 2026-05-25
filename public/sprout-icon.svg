@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Sprout Meditation icon">
+  <rect width="512" height="512" rx="112" fill="#fbfaf9"/>
+  <circle cx="256" cy="272" r="150" fill="#678e7c" opacity="0.14"/>
+  <path d="M256 344c0-96 0-150 0-176" fill="none" stroke="#678e7c" stroke-width="28" stroke-linecap="round"/>
+  <path d="M246 220c-70-8-116-48-130-116 68 2 120 45 130 116Z" fill="#678e7c"/>
+  <path d="M266 220c70-8 116-48 130-116-68 2-120 45-130 116Z" fill="#7fa392"/>
+  <path d="M256 344c50-64 104-91 162-80-26 58-80 91-162 80Z" fill="#88aa9a"/>
+  <path d="M256 344c-50-64-104-91-162-80 26 58 80 91 162 80Z" fill="#5f8675"/>
+</svg>

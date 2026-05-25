@@ -3,17 +3,17 @@ import { useMeditationStore } from '../store/useMeditationStore';
 import { audioEngine } from '../services/audioEngine';
 
 const BELL_SOUNDS = [
-    { id: 'Tibetan', name: 'Tibetan Bowl', desc: 'Deep resonance', icon: 'landscape', url: 'https://actions.google.com/sounds/v1/foley/dinner_bell.ogg' },
-    { id: 'Gong', name: 'Zen Gong', desc: 'Low frequency', icon: 'lens', url: 'https://actions.google.com/sounds/v1/foley/ambience_bell.ogg' },
-    { id: 'Nature', name: 'Nature Chime', desc: 'Clear & sharp', icon: 'diamond', url: 'https://actions.google.com/sounds/v1/foley/wind_chime_single.ogg' },
-    { id: 'Silence', name: 'No Sound', desc: 'Quiet focus', icon: 'block', url: '' },
+    { id: 'Tibetan', name: 'Tibetan Bowl', desc: 'Deep resonance', icon: 'landscape' },
+    { id: 'Gong', name: 'Zen Gong', desc: 'Low frequency', icon: 'lens' },
+    { id: 'Nature', name: 'Nature Chime', desc: 'Clear & sharp', icon: 'diamond' },
+    { id: 'Silence', name: 'No Sound', desc: 'Quiet focus', icon: 'block' },
 ];
 
 const AMBIENT_SOUNDS = [
-    { id: 'None', name: 'Silent', desc: 'No background sound', icon: 'block', url: '' },
-    { id: 'Rain', name: 'Light Rain', desc: 'Gentle drizzle', icon: 'water_drop', url: 'https://actions.google.com/sounds/v1/water/rain_on_roof.ogg' },
-    { id: 'Forest', name: 'Deep Forest', desc: 'Birds & leaves', icon: 'forest', url: 'https://actions.google.com/sounds/v1/nature/forest_morning_birds.ogg' },
-    { id: 'WhiteNoise', name: 'White Noise', desc: 'Focus enhancement', icon: 'waves', url: 'https://actions.google.com/sounds/v1/weather/white_noise.ogg' },
+    { id: 'None', name: 'Silent', desc: 'No background sound', icon: 'block' },
+    { id: 'Rain', name: 'Light Rain', desc: 'Gentle drizzle', icon: 'water_drop' },
+    { id: 'Forest', name: 'Deep Forest', desc: 'Birds & leaves', icon: 'forest' },
+    { id: 'WhiteNoise', name: 'White Noise', desc: 'Focus enhancement', icon: 'waves' },
 ];
 
 const AudioSettings: React.FC = () => {
@@ -32,14 +32,13 @@ const AudioSettings: React.FC = () => {
         });
     };
 
-    const playPreview = async (id: string, url: string, type: 'bell' | 'ambient') => {
-        if (!url) return;
+    const playPreview = (id: string, type: 'bell' | 'ambient') => {
+        if (id === 'Silence' || id === 'None') return;
         setPreviewing(id);
-        await audioEngine.loadSound(id, url);
         if (type === 'bell') {
-            audioEngine.playBell(id);
+            audioEngine.playBell(id, currentPreset.audioConfig.volume);
         } else {
-            audioEngine.playAmbient(id);
+            audioEngine.playAmbient(id, currentPreset.audioConfig.volume);
             setTimeout(() => {
                 audioEngine.stopAmbient();
                 setPreviewing(null);
@@ -81,9 +80,9 @@ const AudioSettings: React.FC = () => {
                                     </div>
                                 </div>
                                 <div className="flex items-center gap-4">
-                                    {sound.url && (
+                                    {sound.id !== 'Silence' && (
                                         <button
-                                            onClick={(e) => { e.preventDefault(); playPreview(sound.id, sound.url, 'bell'); }}
+                                            onClick={(e) => { e.preventDefault(); playPreview(sound.id, 'bell'); }}
                                             className={`h-8 w-8 rounded-full flex items-center justify-center transition-colors ${previewing === sound.id ? 'text-primary' : 'text-neutral-400 hover:text-primary'}`}
                                         >
                                             <span className="material-symbols-outlined">{previewing === sound.id ? 'volume_up' : 'play_arrow'}</span>
@@ -120,9 +119,9 @@ const AudioSettings: React.FC = () => {
                                     </div>
                                 </div>
                                 <div className="flex items-center gap-4">
-                                    {sound.url && (
+                                    {sound.id !== 'None' && (
                                         <button
-                                            onClick={(e) => { e.preventDefault(); playPreview(sound.id, sound.url, 'ambient'); }}
+                                            onClick={(e) => { e.preventDefault(); playPreview(sound.id, 'ambient'); }}
                                             className={`h-8 w-8 rounded-full flex items-center justify-center transition-colors ${previewing === sound.id ? 'text-primary' : 'text-neutral-400 hover:text-primary'}`}
                                         >
                                             <span className="material-symbols-outlined">{previewing === sound.id ? 'volume_up' : 'play_arrow'}</span>

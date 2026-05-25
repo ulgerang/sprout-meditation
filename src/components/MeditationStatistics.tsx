@@ -74,8 +74,8 @@ export const MeditationStatistics: React.FC = () => {
                             </button>
                         </div>
                         <div className="grid grid-cols-7 gap-y-4 text-center">
-                            {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map(d => (
-                                <div key={d} className="text-[10px] font-bold text-neutral-400 uppercase tracking-tighter">{d}</div>
+                            {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map((d, i) => (
+                                <div key={`${d}-${i}`} className="text-[10px] font-bold text-neutral-400 uppercase tracking-tighter">{d}</div>
                             ))}
                             {/* Empty days for layout */}
                             {Array.from({ length: 4 }).map((_, i) => <div key={i}></div>)}

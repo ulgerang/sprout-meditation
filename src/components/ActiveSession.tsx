@@ -1,97 +1,88 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useMeditationStore } from '../store/useMeditationStore';
 import { useTimer } from '../hooks/useTimer';
-import { Haptics, ImpactStyle } from '@capacitor/haptics';
+import { Haptics } from '@capacitor/haptics';
 import { KeepAwake } from '@capacitor-community/keep-awake';
 import { audioEngine } from '../services/audioEngine';
-
-const BELL_MAP: Record<string, string> = {
-    'Tibetan': 'https://actions.google.com/sounds/v1/foley/dinner_bell.ogg',
-    'Gong': 'https://actions.google.com/sounds/v1/foley/ambience_bell.ogg',
-    'Nature': 'https://actions.google.com/sounds/v1/foley/wind_chime_single.ogg',
-};
-
-const AMBIENT_MAP: Record<string, string> = {
-    'Rain': 'https://actions.google.com/sounds/v1/water/rain_on_roof.ogg',
-    'Forest': 'https://actions.google.com/sounds/v1/nature/forest_morning_birds.ogg',
-    'WhiteNoise': 'https://actions.google.com/sounds/v1/weather/white_noise.ogg',
-};
 
 const ActiveSession: React.FC = () => {
     const { isSessionActive, isPaused, currentPreset, resetSession, togglePaused, completeSession } = useMeditationStore();
     const { timeLeft, formatTime, isPreparing } = useTimer();
+    const startBellPlayedRef = useRef(false);
+    const completionHandledRef = useRef(false);
 
-    // Setup Audio
+    const playConfiguredBell = React.useCallback(() => {
+        const { bell, volume } = currentPreset.audioConfig;
+        if (bell === 'Silence') return;
+
+        audioEngine.playBell(bell, volume);
+    }, [currentPreset.audioConfig]);
+
+    // Keep the screen awake only while a session is active.
     useEffect(() => {
         if (isSessionActive) {
-            const setupAudio = async () => {
-                const { ambient } = currentPreset.audioConfig;
-                if (ambient !== 'None' && AMBIENT_MAP[ambient]) {
-                    await audioEngine.loadSound(ambient, AMBIENT_MAP[ambient]);
-                    if (!isPaused) {
-                        audioEngine.playAmbient(ambient, 0.4);
-                    }
-                }
-            };
-            setupAudio();
             KeepAwake.keepAwake().catch(() => { });
         } else {
-            audioEngine.stopAmbient();
             KeepAwake.allowSleep().catch(() => { });
         }
 
         return () => {
-            audioEngine.stopAmbient();
             KeepAwake.allowSleep().catch(() => { });
         };
     }, [isSessionActive]);
 
-    // Handle Pause/Resume for Audio
+    // Load and control ambient audio separately so pause/resume does not restart the timer.
     useEffect(() => {
-        const { ambient } = currentPreset.audioConfig;
-        if (isSessionActive) {
-            if (isPaused) {
-                audioEngine.stopAmbient();
-            } else if (ambient !== 'None') {
-                audioEngine.playAmbient(ambient, 0.4);
-            }
-        }
-    }, [isPaused, isSessionActive]);
+        let cancelled = false;
+        const { ambient, volume } = currentPreset.audioConfig;
 
-    // Handle bell triggers
-    useEffect(() => {
-        if (isSessionActive && !isPreparing && !isPaused) {
-            const bell = currentPreset.audioConfig.bell;
-            if (bell !== 'Silence') {
-                audioEngine.playBell(bell);
-            }
+        audioEngine.stopAmbient();
+
+        if (isSessionActive && !isPaused && ambient !== 'None' && !cancelled) {
+            audioEngine.playAmbient(ambient, volume);
         }
-    }, [isPreparing]);
+
+        return () => {
+            cancelled = true;
+            audioEngine.stopAmbient();
+        };
+    }, [isSessionActive, isPaused, currentPreset.audioConfig]);
+
+    useEffect(() => {
+        if (!isSessionActive) {
+            startBellPlayedRef.current = false;
+            completionHandledRef.current = false;
+        }
+    }, [isSessionActive]);
+
+    // Handle the start bell once, either after preparation or immediately when preparation is disabled.
+    useEffect(() => {
+        if (isSessionActive && !isPreparing && !startBellPlayedRef.current) {
+            startBellPlayedRef.current = true;
+            playConfiguredBell();
+        }
+    }, [isSessionActive, isPreparing, playConfiguredBell]);
 
     // Handle session completion
     useEffect(() => {
-        if (timeLeft === 0 && isSessionActive && !isPreparing && !isPaused) {
-            const bell = currentPreset.audioConfig.bell;
-            if (bell !== 'Silence') {
-                audioEngine.playBell(bell);
-            }
+        if (timeLeft === 0 && isSessionActive && !isPreparing && !isPaused && !completionHandledRef.current) {
+            completionHandledRef.current = true;
+            playConfiguredBell();
             Haptics.vibrate().catch(() => { });
 
-            // Transition to summary after 2 seconds (to let the bell resonate)
+            // Transition to summary after 2 seconds so the bell can resonate.
             const timeout = setTimeout(() => {
                 completeSession(currentPreset.duration * 60);
             }, 2000);
 
             return () => clearTimeout(timeout);
         }
-    }, [timeLeft, isSessionActive, isPreparing, isPaused]);
+    }, [timeLeft, isSessionActive, isPreparing, isPaused, currentPreset.duration, completeSession, playConfiguredBell]);
 
     const handleExit = () => {
         audioEngine.stopAmbient();
         resetSession();
     };
-
-
 
     return (
         <div className="bg-background-light dark:bg-background-dark min-h-screen text-neutral-dark dark:text-neutral-light font-display antialiased overflow-hidden selection:bg-primary/30">
