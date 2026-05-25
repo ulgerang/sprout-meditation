@@ -157,6 +157,29 @@ async function clickByText(text) {
   await delay(500);
 }
 
+async function expectSettingsPhoneWidth() {
+  const metrics = await evaluate(`
+    (() => {
+      const main = document.querySelector('main');
+      if (!main || !document.body.innerText.includes('Backup & Restore')) return null;
+      const rect = main.getBoundingClientRect();
+      return {
+        width: Math.round(rect.width),
+        left: Math.round(rect.left),
+        right: Math.round(window.innerWidth - rect.right),
+        viewport: window.innerWidth,
+      };
+    })()
+  `);
+
+  if (!metrics) throw new Error('Could not measure settings layout');
+  const isPhoneWidth = metrics.width <= 448;
+  const isCentered = Math.abs(metrics.left - metrics.right) <= 2;
+  if (!isPhoneWidth || !isCentered) {
+    throw new Error(`Settings layout is not phone-width centered: ${JSON.stringify(metrics)}`);
+  }
+}
+
 try {
   await send('Page.enable');
   await send('Runtime.enable');
@@ -205,6 +228,7 @@ try {
     mobile: false,
   });
   await delay(300);
+  await expectSettingsPhoneWidth();
   await screenshot('05-settings-desktop.png');
 
   if (consoleErrors.length > 0) {

@@ -58,21 +58,22 @@ const Settings: React.FC = () => {
     };
 
     return (
-        <div className="bg-background-light dark:bg-background-dark font-body antialiased text-[#242428] dark:text-stone-100 flex flex-col h-screen relative overflow-hidden">
-            {/* Header */}
-            <header className="px-6 pt-12 pb-4 flex items-center justify-between z-10 bg-background-light/90 dark:bg-background-dark/90 backdrop-blur-sm sticky top-0">
-                <button
-                    onClick={() => setCurrentView('home')}
-                    className="w-10 h-10 -ml-2 rounded-full flex items-center justify-center hover:bg-stone-200 dark:hover:bg-stone-800 transition-colors text-[#242428] dark:text-stone-300"
-                >
-                    <ArrowLeft className="w-6 h-6" />
-                </button>
-                <h1 className="font-display text-xl font-medium tracking-tight">Settings</h1>
-                <div className="w-8"></div>
-            </header>
+        <div className="bg-background-light dark:bg-background-dark font-body antialiased text-[#242428] dark:text-stone-100 h-screen overflow-hidden">
+            <div className="relative mx-auto flex h-full w-full max-w-md flex-col">
+                {/* Header */}
+                <header className="px-6 pt-12 pb-4 flex items-center justify-between z-10 bg-background-light/90 dark:bg-background-dark/90 backdrop-blur-sm sticky top-0">
+                    <button
+                        onClick={() => setCurrentView('home')}
+                        className="w-10 h-10 -ml-2 rounded-full flex items-center justify-center hover:bg-stone-200 dark:hover:bg-stone-800 transition-colors text-[#242428] dark:text-stone-300"
+                    >
+                        <ArrowLeft className="w-6 h-6" />
+                    </button>
+                    <h1 className="font-display text-xl font-medium tracking-tight">Settings</h1>
+                    <div className="w-8"></div>
+                </header>
 
-            {/* Main Content */}
-            <main className="flex-1 overflow-y-auto px-6 pb-12 space-y-8 no-scrollbar">
+                {/* Main Content */}
+                <main className="flex-1 overflow-y-auto px-6 pb-12 space-y-8 no-scrollbar">
                 {/* Data Management Section */}
                 <section className="mt-4">
                     <div className="flex items-center gap-2 mb-3 px-1">
@@ -169,7 +170,8 @@ const Settings: React.FC = () => {
                     <Heart className="w-8 h-8 text-primary animate-pulse" />
                     <p className="text-[10px] text-neutral-400 mt-2 tracking-widest uppercase">Your peace of mind</p>
                 </div>
-            </main>
+                </main>
+            </div>
         </div>
     );
 };
