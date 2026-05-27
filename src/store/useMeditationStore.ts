@@ -36,6 +36,8 @@ interface MeditationState {
     history: MeditationSession[];
     lastSession?: MeditationSession;
     selectedSession?: MeditationSession; // For viewing details
+    sessionStartTime: number | null; // Date.now() when main session started
+    hasCompletedTarget: boolean; // true when timer reached 0, session continues
 
     // Actions
     setSessionActive: (active: boolean) => void;
@@ -51,6 +53,7 @@ interface MeditationState {
     finishPreparation: () => void;
     resetSession: () => void;
     updatePreset: (id: string, updates: Partial<Preset>) => void;
+    markTargetComplete: () => void;
 
     // History Actions
     completeSession: (durationSeconds: number) => void;
@@ -117,6 +120,8 @@ export const useMeditationStore = create<MeditationState>()(
             prepTimeLeft: defaultPresets[0].preparationTime,
             currentView: 'home',
             history: [],
+            sessionStartTime: null,
+            hasCompletedTarget: false,
 
             setSessionActive: (active) => set({ isSessionActive: active }),
             setPreparing: (preparing) => set({ isPreparing: preparing }),
@@ -138,18 +143,26 @@ export const useMeditationStore = create<MeditationState>()(
                     isPreparing: hasPrep,
                     isPaused: false,
                     prepTimeLeft: state.currentPreset.preparationTime,
-                    timeLeft: state.currentPreset.duration * 60
+                    timeLeft: state.currentPreset.duration * 60,
+                    sessionStartTime: hasPrep ? null : Date.now(), // set when main phase starts
+                    hasCompletedTarget: false,
                 };
             }),
-            finishPreparation: () => set({ isPreparing: false }),
+            finishPreparation: () => set({
+                isPreparing: false,
+                sessionStartTime: Date.now(), // main phase starts now
+            }),
             resetSession: () => set((state) => ({
                 isSessionActive: false,
                 isPreparing: false,
                 isPaused: false,
                 timeLeft: state.currentPreset.duration * 60,
                 prepTimeLeft: state.currentPreset.preparationTime,
-                currentView: 'home'
+                currentView: 'home',
+                sessionStartTime: null,
+                hasCompletedTarget: false,
             })),
+            markTargetComplete: () => set({ hasCompletedTarget: true }),
             updatePreset: (id, updates) => set((state) => {
                 const newPresets = state.presets.map(p => p.id === id ? { ...p, ...updates } : p);
                 const isCurrent = state.currentPreset.id === id;

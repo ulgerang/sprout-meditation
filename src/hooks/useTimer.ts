@@ -41,7 +41,9 @@ export const useTimer = () => {
                         setTimeLeft(currentTimeLeft);
                     }
                     if (currentTimeLeft <= 0) {
-                        startTimeRef.current = null;
+                        // Timer reached target — keep running so session can
+                        // continue past the target duration. timeLeft stays at 0;
+                        // actual elapsed time is tracked via sessionStartTime.
                     }
                 }
 

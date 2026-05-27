@@ -6,7 +6,7 @@ import { KeepAwake } from '@capacitor-community/keep-awake';
 import { audioEngine } from '../services/audioEngine';
 
 const ActiveSession: React.FC = () => {
-    const { isSessionActive, isPaused, currentPreset, resetSession, togglePaused, completeSession } = useMeditationStore();
+    const { isSessionActive, isPaused, currentPreset, resetSession, togglePaused, completeSession, sessionStartTime, hasCompletedTarget, markTargetComplete } = useMeditationStore();
     const { timeLeft, formatTime, isPreparing } = useTimer();
     const startBellPlayedRef = useRef(false);
     const completionHandledRef = useRef(false);
@@ -63,25 +63,27 @@ const ActiveSession: React.FC = () => {
         }
     }, [isSessionActive, isPreparing, playConfiguredBell]);
 
-    // Handle session completion
+    // Handle session target reached — bell rings, session continues past target
     useEffect(() => {
         if (timeLeft === 0 && isSessionActive && !isPreparing && !isPaused && !completionHandledRef.current) {
             completionHandledRef.current = true;
             playConfiguredBell();
             Haptics.vibrate().catch(() => { });
-
-            // Transition to summary after 2 seconds so the bell can resonate.
-            const timeout = setTimeout(() => {
-                completeSession(currentPreset.duration * 60);
-            }, 2000);
-
-            return () => clearTimeout(timeout);
+            markTargetComplete();
+            // Session continues — user must press "End Session" to finish
         }
-    }, [timeLeft, isSessionActive, isPreparing, isPaused, currentPreset.duration, completeSession, playConfiguredBell]);
+    }, [timeLeft, isSessionActive, isPreparing, isPaused, playConfiguredBell, markTargetComplete]);
 
     const handleExit = () => {
         audioEngine.stopAmbient();
-        resetSession();
+        if (hasCompletedTarget && sessionStartTime) {
+            // Target was reached — save session with actual elapsed time
+            const elapsedSeconds = Math.floor((Date.now() - sessionStartTime) / 1000);
+            completeSession(elapsedSeconds);
+        } else {
+            // Early quit before target — reset without saving
+            resetSession();
+        }
     };
 
     return (
@@ -131,31 +133,50 @@ const ActiveSession: React.FC = () => {
 
                 {/* Footer Controls (Mobile Optimized) */}
                 <footer className="pb-20 pt-10 px-8 flex flex-col items-center gap-6 z-10">
+                    {/* Target-complete indicator */}
+                    {hasCompletedTarget && (
+                        <div className="flex items-center gap-2 text-primary/70 font-body text-xs tracking-wide animate-pulse">
+                            <span className="material-symbols-outlined text-base">check_circle</span>
+                            <span>Target reached — session continues</span>
+                        </div>
+                    )}
                     <div className="flex items-center gap-4 w-full max-w-xs">
-                        {/* Exit Button - Bottom Left-ish */}
-                        <button
-                            onClick={handleExit}
-                            className="flex-1 flex items-center justify-center gap-2 h-16 rounded-2xl bg-neutral-100 dark:bg-neutral-800 text-neutral-500 font-body font-bold text-xs uppercase tracking-widest transition-all active:scale-95 hover:bg-red-50 dark:hover:bg-red-900/10 hover:text-red-500"
-                        >
-                            <span className="material-symbols-outlined text-xl">close</span>
-                            <span>Exit</span>
-                        </button>
+                        {/* Exit / End Session Button */}
+                        {hasCompletedTarget ? (
+                            <button
+                                onClick={handleExit}
+                                className="flex-[2] flex items-center justify-center gap-3 h-16 rounded-2xl bg-primary text-white shadow-lg shadow-primary/30 font-body font-bold text-sm uppercase tracking-[0.15em] transition-all active:scale-95 hover:bg-[#5a7d6d]"
+                            >
+                                <span className="material-symbols-outlined text-2xl">flag</span>
+                                <span>End Session</span>
+                            </button>
+                        ) : (
+                            <>
+                                <button
+                                    onClick={handleExit}
+                                    className="flex-1 flex items-center justify-center gap-2 h-16 rounded-2xl bg-neutral-100 dark:bg-neutral-800 text-neutral-500 font-body font-bold text-xs uppercase tracking-widest transition-all active:scale-95 hover:bg-red-50 dark:hover:bg-red-900/10 hover:text-red-500"
+                                >
+                                    <span className="material-symbols-outlined text-xl">close</span>
+                                    <span>Exit</span>
+                                </button>
 
-                        {/* Pause/Resume Button - Bottom Main */}
-                        <button
-                            onClick={togglePaused}
-                            className={`flex-[2] flex items-center justify-center gap-3 h-16 rounded-2xl transition-all active:scale-95 shadow-lg ${isPaused
-                                ? 'bg-primary text-white shadow-primary/30'
-                                : 'bg-white dark:bg-surface-dark text-primary border border-primary/10'
-                                }`}
-                        >
-                            <span className="material-symbols-outlined text-2xl" style={{ fontVariationSettings: isPaused ? "'FILL' 1" : "" }}>
-                                {isPaused ? 'play_arrow' : 'pause'}
-                            </span>
-                            <span className="font-body font-bold text-sm uppercase tracking-[0.15em]">
-                                {isPaused ? 'Resume' : 'Pause'}
-                            </span>
-                        </button>
+                                {/* Pause/Resume Button - Bottom Main */}
+                                <button
+                                    onClick={togglePaused}
+                                    className={`flex-[2] flex items-center justify-center gap-3 h-16 rounded-2xl transition-all active:scale-95 shadow-lg ${isPaused
+                                        ? 'bg-primary text-white shadow-primary/30'
+                                        : 'bg-white dark:bg-surface-dark text-primary border border-primary/10'
+                                        }`}
+                                >
+                                    <span className="material-symbols-outlined text-2xl" style={{ fontVariationSettings: isPaused ? "'FILL' 1" : "" }}>
+                                        {isPaused ? 'play_arrow' : 'pause'}
+                                    </span>
+                                    <span className="font-body font-bold text-sm uppercase tracking-[0.15em]">
+                                        {isPaused ? 'Resume' : 'Pause'}
+                                    </span>
+                                </button>
+                            </>
+                        )}
                     </div>
                 </footer>
             </div>
